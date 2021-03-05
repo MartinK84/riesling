@@ -16,17 +16,17 @@ Tobias C Wood & Emil Ljungberg
 
 Pre-compiled executables are provided for Linux and Mac OS X in a .tar.gz 
 archive from http://github.com/spinicist/riesling/releases. Download the archive and 
-extract it with `tar -xzf riesling-platform.tar.gz`. Then, move the resulting `riesling` executable to somewhere on your `$PATH`, for instance `/usr/local/bin`. That's it.
+extract it with `tar -xzf riesling-<platform>.tar.gz`. Then, move the resulting `riesling` executable to somewhere on your `$PATH`, for instance `/usr/local/bin`. That's it.
 
 - MacOS Catalina or higher users should use `curl` to download the binary, i.e. 
-  type `curl -L https://github.com/spinicist/QUIT/releases/download/v1.0/riesling-macos.tar.gz`
+  type `curl -L https://github.com/spinicist/riesling/releases/download/v0.1/riesling-macos.tar.gz`
   This is because Safari now sets the quarantine attribute of all downloads,
   which prevents them being run as the binary is unsigned. It is possible to 
   remove the quarantine flag with `xattr`, but downloading with `curl` is more 
   straightforward.
 - The Linux executable is compiled on Ubuntu 16.04 with GLIBC version 2.3 and a 
   statically linked libc++. This means it will hopefully run on most modern 
-  Linux distributions. Let me know if it doesn't.
+  Linux distributions. Let me know if it doesn't. Download with `wget https://github.com/spinicist/riesling/releases/download/v0.1/riesling-linux.tar.gz`
 
 ## Compilation
 
@@ -34,7 +34,7 @@ If you wish to compile RIESLING yourself, compilation should hopefully be straig
 
 0. Install the dependencies: `cmake` \& `curl` (`vcpkg` requires `curl`).
 1. Clone the repository. `git clone https://github.com/spinicist/riesling`
-2. Run `bootstraph.sh`.
+2. Run `./bootstraph.sh`.
 
 ## Usage
 
@@ -44,7 +44,11 @@ RIESLING uses HDF5 (.h5) files as an input/intermediate format and NIFTI (.nii) 
 
 There are several reconstruction algorithms currently provided in RIESLING - simple non-iterative recon with root-sum-squares channel combination (`riesling rss`), non-iterative recon with self-calibrating sensitivy map extraction (`riesling sense`), iterative cgSENSE with Töplitz embedding (`riesling cg`), and iterative recon with TGV regularization (`riesling tgv`). An experimental version of the Non-Uniform Fourier Transform/Direct Summation method (`riesling ds`) is also provided, but not recommended except for curiosity's sake. Coil compression via PCA/SVD is also provided (`riesling compress`).
 
-A demo using the dataset from the [ISMRM CG-SENSE Reproducibility challenge](https://ismrm.github.io/rrsg/challenge_one/) can be found in `examples/rrsg_cgsense`, which includes both conversion to the RIESLING .h5 format and examples of how to run RIESLING.
+## Examples
+
+A demo using the 2D dataset from the [ISMRM CG-SENSE Reproducibility challenge](https://ismrm.github.io/rrsg/challenge_one/) can be found in `examples/rrsg_cgsense`, which includes both conversion to the RIESLING .h5 format and examples of how to run RIESLING.
+
+Another demo using a 3D Shepp Logan phantom can be found in `examples/notebook_demo`. This demo goes through all the tools available in `riesling` in a Jupyter notebook. 
 
 ## Input Format
 
