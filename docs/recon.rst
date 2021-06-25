@@ -4,7 +4,7 @@ Reconstruction
 There are currently three different reconstruction commands provided in RIESLING - `recon`, `cg` and `tgv`. More may be added in future.
 
 Non-iterative
-=============
+-------------
 
 The `recon` command provides basic non-iterative reconstructions. This is useful when you want to run a quick reconstruction to ensure that the data file is in the correct format, but is unlikely to yield optimal image quality. However it will be useful to describe some of the command options here, because they are shared with `cg` and `tgv`.
 
@@ -25,7 +25,7 @@ Due to the oversampled central region in most non-Cartesian trajectories reasona
 You can apply a basic Tukey filter to the final image k-space using `--tukey_start`, `--tukey_end` and `--tukey_height`. The start and end are defined as the fractional radius in k-space, i.e. 0.5 and 1. The height option is specified at the end radius and should be between 0 (heavy filtering) and 1 (no filtering). Finally, if you want to expand (or contract) the field-of-view of an image, for instance with a read-oversampled acquisition, then use the `--fov` option.
 
 Iterative
-=========
+---------
 
 The workhorse reconstruction tool in RIESLING is `cg`, which runs an un-regularized cgSENSE reconstruction. For speed RIESLING uses a Töplitz embedding strategy. This uses the gridding method to calculate the k-space transfer function on the Cartesian grid. After the initial gridding from non-Cartesian to Cartesian grid, each iteration only requires SENSE combination/expansion, the forwards/reverse FFT, and a multiplication of Cartesian k-space by the transfer function.
 
@@ -36,7 +36,7 @@ Finally, `cg` adds an additional `--iter_fov` option which controls the field-of
 The `tgv` command uses Total Generalized Variation regularization to improve image quality. It uses a different optimization algorithm to `cg` which is noticeable slower, but still reasonable. It adds three more options. `--alpha` controls the initial regularization level. The default is 1e-5, better results can often be obtained with 2e-5. `--reduce` will reduce the regularization over the course of the iterations, which can prevent over-smoothing. `--step` controls the gradient-descent step size and is specified as an inverse, i.e. a value of 8 results in a step-size of 1/8th the gradient. Smaller values (larger step sizes) give faster convergence but can lead to artefacts.
 
 References
-==========
+----------
 
 1. Fessler, J. A. & Sutton, B. P. Nonuniform fast fourier transforms using min-max interpolation. IEEE Transactions on Signal Processing 51, 560–574 (2003).
 2. Beatty, P. J., Nishimura, D. G. & Pauly, J. M. Rapid gridding reconstruction with a minimal oversampling ratio. IEEE Transactions on Medical Imaging 24, 799–808 (2005).
